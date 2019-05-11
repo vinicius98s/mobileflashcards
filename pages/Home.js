@@ -72,9 +72,9 @@ export default class Home extends React.Component {
 			return (
 				<ColorContext.Consumer>
 					{(mainColor) => (
-						<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+						<Wrapper>
 							<ActivityIndicator size="large" color={mainColor} />
-						</View>
+						</Wrapper>
 					)}
 				</ColorContext.Consumer>
 			)
@@ -89,6 +89,13 @@ export default class Home extends React.Component {
 								modal={modalVisible}
 								handleModalVisibility={this.handleModalVisibility}
 								handleDecks={this.handleDecks}
+								navigateToDeck={(title) => {
+									this.props.navigation.navigate('Deck', {
+										title: title,
+										numCards: 0,
+										mainColor: mainColor
+									})
+								}}
 								home
 							/>
 						)}
@@ -126,6 +133,12 @@ export default class Home extends React.Component {
 		)
 	}
 }
+
+const Wrapper = styled.View`
+	flex: 1;
+	align-items: center;
+	justify-content: center;
+`
 
 const Container = styled.View`
 	padding: 0 20px;

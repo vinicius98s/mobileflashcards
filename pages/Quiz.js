@@ -9,7 +9,7 @@ import { getMainColor } from '../helpers/colors'
 
 import { ColorContext } from '../App'
 
-export default class Quiz extends React.Component {
+export default class Quiz extends React.PureComponent {
 	static navigationOptions = ({ navigation }) => ({
 		title: `Quiz - ${navigation.state.params.deck.title}`,
 		headerStyle: {
@@ -48,6 +48,15 @@ export default class Quiz extends React.Component {
 		}))
 	}
 
+	restartGame = () => {
+		this.setState({
+			questionsCounter: 0,
+			points: 0,
+			showAnswer: false,
+			isFinished: false
+		})
+	}
+
 	render() {
 		const { deck } = this.props.navigation.state.params
 		const { questionsCounter, points, showAnswer, isFinished } = this.state
@@ -71,16 +80,20 @@ export default class Quiz extends React.Component {
 								{points === 0 && 'Well...\n😐'}
 							</Final>
 							<Description>
-								{deck.questions.length === points && 'You got all the questions right.'}
-								{points > 0 && points < deck.questions.length && 'You got some questions. Nice one!'}
-								{points === 0 && "That's not a good one. You can try again."}
+								{deck.questions.length === points && 'All the questions right.\n'}
+								{points > 0 && points < deck.questions.length && 'Got some questions. Nice one!\n'}
+								{points === 0 && "That's not a good one.\n"}
+								{`You made ${points} ${points > 1 ? 'points' : 'point'}`}
 							</Description>
-							<Button
-								primary
-								title="Go to home"
-								onPress={() => this.props.navigation.navigate('Home')}
-								style={{ marginTop: 20 }}
-							/>
+							<Row>
+								<Button secondary title="Restart" onPress={() => this.restartGame()} />
+								<View style={{ width: 10 }} />
+								<Button
+									primary
+									title="Go to home"
+									onPress={() => this.props.navigation.navigate('Home')}
+								/>
+							</Row>
 						</Container>
 					)}
 				</ColorContext.Consumer>
@@ -116,6 +129,11 @@ export default class Quiz extends React.Component {
 	}
 }
 
+const Row = styled.View`
+	flex-direction: row;
+	margin-top: 20;
+`
+
 const Container = styled.View`
 	flex: 1;
 	align-items: center;
@@ -129,6 +147,7 @@ const TopWrapper = styled.View`
 	top: 20;
 	left: 20;
 	justify-content: space-between;
+	align-items: center;
 	width: 100%;
 `
 

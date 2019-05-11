@@ -9,12 +9,8 @@ import Deck from './pages/Deck'
 import Quiz from './pages/Quiz'
 import Color from './pages/Color'
 
-import { getMainColor, setMainColor } from './helpers/colors'
+import { getMainColor } from './helpers/colors'
 import { setNotification } from './helpers/notifications'
-
-const Container = styled.View`
-	flex: 1;
-`
 
 const StackNavigator = createStackNavigator(
 	{
@@ -81,9 +77,9 @@ export default class App extends React.Component {
 
 		if (!mainColor) {
 			return (
-				<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+				<Wrapper>
 					<ActivityIndicator color="black" size="large" />
-				</View>
+				</Wrapper>
 			)
 		}
 
@@ -97,3 +93,13 @@ export default class App extends React.Component {
 		)
 	}
 }
+
+const Wrapper = styled.View`
+	flex: 1;
+	align-items: center;
+	justify-content: center;
+`
+
+const Container = styled.View`
+	flex: 1;
+`

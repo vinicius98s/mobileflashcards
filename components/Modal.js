@@ -23,6 +23,7 @@ export default class CustomModal extends React.Component {
 		saveDeckTitle(this.state.deckTitle).then(() => {
 			this.props.handleModalVisibility()
 			this.props.handleDecks()
+			this.props.navigateToDeck(this.state.deckTitle)
 		})
 	}
 
