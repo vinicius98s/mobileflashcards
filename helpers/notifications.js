@@ -2,7 +2,7 @@ import { Notifications, Permissions } from 'expo'
 
 const notification = {
 	title: 'Study time!',
-	body: "🖐 Don't to study today!",
+	body: "🖐 Don't forget to study today!",
 	ios: {
 		sound: true
 	},
