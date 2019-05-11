@@ -1,18 +1,16 @@
 import { Notifications, Permissions } from 'expo'
 
-function createNotification() {
-	return {
-		title: 'Study time!',
-		body: "🖐 Don't to study today!",
-		ios: {
-			sound: true
-		},
-		android: {
-			sound: true,
-			priority: 'high',
-			sticky: false,
-			vibrate: true
-		}
+const notification = {
+	title: 'Study time!',
+	body: "🖐 Don't to study today!",
+	ios: {
+		sound: true
+	},
+	android: {
+		sound: true,
+		priority: 'high',
+		sticky: false,
+		vibrate: true
 	}
 }
 
@@ -27,7 +25,7 @@ export function setNotification() {
 			tomorrow.setHours(20)
 			tomorrow.setMinutes(0)
 
-			Notifications.scheduleLocalNotificationAsync(createNotification(), {
+			Notifications.scheduleLocalNotificationAsync(notification, {
 				time: tomorrow,
 				repeat: 'day'
 			})
