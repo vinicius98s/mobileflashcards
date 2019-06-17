@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/native'
 
-const mainColor = 'tomato'
 import { ColorContext } from '../App'
 
 const StyledButton = styled.TouchableOpacity`
